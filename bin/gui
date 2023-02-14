@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+source workspace/install/setup.bash
+
+gz sim -v 4 -g

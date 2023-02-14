@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+source workspace/install/setup.bash
+
+# launch server in one terminal
+gz sim -v 4 shapes.sdf -s
