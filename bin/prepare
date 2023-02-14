@@ -1,0 +1,100 @@
+#!/usr/bin/env bash
+
+set -e
+
+#
+# Get ready: Dependencies and other preps
+#
+
+pip install -r requirements.txt
+
+pushd workspace/src
+
+vcs import < collection-harmonic.yaml
+
+if [[ "$(uname -s)" = "Darwin" ]]
+then
+  # Make sure we have Xcode. Default to true, as returns code 1 when already
+  # installed
+  xcode-select --install || true
+
+  # Install dependencies with Homebrew
+  brew update
+  brew tap osrf/simulation
+  brew install xquartz --cask
+  brew install \
+    assimp \
+    boost \
+    bullet \
+    cmake \
+    cppzmq \
+    dartsim@6.10.0 \
+    doxygen \
+    eigen \
+    fcl \
+    ffmpeg \
+    flann \
+    freeimage \
+    freetype \
+    gdal \
+    gflags \
+    google-benchmark \
+    gts \
+    ipopt \
+    jsoncpp \
+    libccd \
+    libyaml \
+    libzzip \
+    libzip \
+    nlopt \
+    ode \
+    open-scene-graph \
+    ossp-uuid \
+    ogre1.9 \
+    ogre2.3 \
+    pkg-config \
+    protobuf \
+    qt@5 \
+    qwt-qt5 \
+    rapidjson \
+    ruby \
+    tbb \
+    tinyxml \
+    tinyxml2 \
+    urdfdom \
+    zeromq
+
+  # Fix symlinks for Apple/Intel architectures
+  if [[ $(sysctl -n machdep.cpu.brand_string) =~ "Apple" ]]
+  then
+    # dartsim@6.10.0
+    export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:${HOMEBREW_PREFIX}/opt/dartsim@6.10.0
+    export DYLD_FALLBACK_LIBRARY_PATH=${DYLD_FALLBACK_LIBRARY_PATH}:${HOMEBREW_PREFIX}/opt/dartsim@6.10.0/lib:${HOMEBREW_PREFIX}/opt/octomap/local
+    export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${HOMEBREW_PREFIX}/opt/dartsim@6.10.0/lib/pkgconfig
+    # qt@5
+    export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:${HOMEBREW_PREFIX}/opt/qt@5
+  else
+    # dartsim@6.10.0
+    export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:${HOMEBREW_PREFIX}/opt/dartsim@6.10.0
+    export DYLD_FALLBACK_LIBRARY_PATH=${DYLD_FALLBACK_LIBRARY_PATH}:${HOMEBREW_PREFIX}/opt/dartsim@6.10.0/lib:/usr/local/opt/octomap/local
+    export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${HOMEBREW_PREFIX}/opt/dartsim@6.10.0/lib/pkgconfig
+    # qt@5
+    export CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:${HOMEBREW_PREFIX}/opt/qt@5
+  fi
+fi
+
+popd
+
+#
+# Building
+#
+
+if [[ "$(uname -s)" = "Darwin" ]]
+then
+  if [[ $(sysctl -n machdep.cpu.brand_string) =~ "Apple" ]]
+  then
+    colcon build --cmake-args -DBUILD_TESTING=OFF -DCMAKE_MACOSX_RPATH=FALSE -DCMAKE_INSTALL_NAME_DIR=$(pwd)/install/lib --merge-install
+  else
+    colcon build --cmake-args -DBUILD_TESTING=OFF --merge-install
+  fi
+fi
