@@ -2,6 +2,8 @@
 
 set -e
 
+mkdir -p workspace/src
+
 #
 # Get ready: Dependencies and other preps
 #
@@ -10,6 +12,7 @@ pip install -r requirements.txt
 
 pushd workspace/src
 
+curl -O https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml
 vcs import < collection-harmonic.yaml
 
 if [[ "$(uname -s)" = "Darwin" ]]
