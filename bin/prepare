@@ -12,8 +12,7 @@ pip install -r requirements.txt
 
 pushd workspace/src
 
-curl -O https://raw.githubusercontent.com/gazebo-tooling/gazebodistro/master/collection-harmonic.yaml
-vcs import < collection-harmonic.yaml
+vcs import < ../../config/collection-harmonic.yaml
 
 if [[ "$(uname -s)" = "Darwin" ]]
 then
