@@ -1,4 +1,4 @@
-* Important: This work pre-dates [binaries and packages provided by Gazebo](https://gazebosim.org/docs/all/getstarted). To quick start, perhaps better to get those. Here is from source, with all it entails, like longer coffee breaks. *
+**Important: This work pre-dates [binaries and packages provided by Gazebo](https://gazebosim.org/docs/all/getstarted). To quick start, perhaps better to get those. Here is from source, with all it entails, like longer coffee breaks.**
 
 # Ignite
 
