@@ -48,14 +48,14 @@ then
     jsoncpp \
     libccd \
     libyaml \
-    libzzip \
     libzip \
+    libzzip \
     nlopt \
     ode \
-    open-scene-graph \
-    ossp-uuid \
     ogre1.9 \
     ogre2.3 \
+    open-scene-graph \
+    ossp-uuid \
     pkg-config \
     protobuf \
     qt@5 \
@@ -63,8 +63,7 @@ then
     rapidjson \
     ruby \
     tbb \
-    tinyxml \
-    tinyxml2 \
+    osrf/simulation/tinyxml2@6.2.0 \
     urdfdom \
     zeromq
 
