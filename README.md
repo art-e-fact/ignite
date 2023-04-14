@@ -19,7 +19,7 @@ Tested and working on U22. Supposed to support MacOS 12, but rought edges still 
 From the root of the reposiotry:
 
     ./bin/prepare
-    
+
  The script will require root access to install the Gazebo package repository key and install some dependencies (here using `apt`). No need to run with `sudo` or as privileged user; the script asks when it needs permission.
  
  A successful install does take some time, and ends with a success message explaining to use other scripts to run.
@@ -29,9 +29,9 @@ From the root of the reposiotry:
  Two scripts are available, each run in its own shell:
  
      ./bin/server
-     
+
 Runs the simulation engine itself in headless mode. It is enough to many workflows.
 
     ./bin/gui
-    
+
 Runs the GUI client to the server, and requires an X11-ready environment.
