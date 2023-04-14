@@ -24,6 +24,8 @@ then
   brew update
   brew tap osrf/simulation
   brew install xquartz --cask
+  # Needed before installing some other dependencies (which do not seem to declare it)
+  brew install svn
   brew install \
     assimp \
     boost \
