@@ -96,6 +96,9 @@ then
     sudo apt-get update
   fi
   sudo apt-get install --yes $(sort -u $(find . -iname 'packages-'`lsb_release -cs`'.apt' -o -iname 'packages.apt' | grep -v '/\.git/') | sed '/gz\|sdf/d' | tr '\n' ' ')
+else
+  echo "System not supported, aborting. At this stage only Linux and Darwin are covered by this script."
+  exit 666
 fi
 
 popd
