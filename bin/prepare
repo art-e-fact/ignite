@@ -13,6 +13,7 @@ pip install -r requirements.txt
 pushd workspace/src
 
 vcs import < ../../config/collection-harmonic.yaml
+vcs pull < ../../config/collection-harmonic.yaml
 
 if [[ "$(uname -s)" = "Darwin" ]]
 then
